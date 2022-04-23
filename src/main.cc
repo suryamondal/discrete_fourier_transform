@@ -9,16 +9,16 @@
 #include "fft.h"
 
 
-const double tPD = 1.;		   // Total Path Difference in sec
-const double maxFrequency = 5000.; // Maximum Frequency to Calculate
+const double tPD = 30.;	// Total Path Difference in sec
+const double maxFrequency = 5.; // Maximum Frequency to Calculate
 
-const Long64_t maxGenPt = 10;	     // If you force
+const Long64_t maxGenPt = 5.;	     // If you force
 const Long64_t maxDataPt = pow(2,1); // If you force
 
 int main() {
 
   const Long64_t minPt = 2.*(maxFrequency*tPD+1);
-  const Long64_t inputDataPt = std::max(maxGenPt,minPt);
+  const Long64_t inputDataPt = maxGenPt*minPt;
 
   std::cout << " Generating Data...." << std::endl;
 
@@ -29,12 +29,16 @@ int main() {
   /****** Generating Data Points ********/
   for(int ij=0;ij<inputDataPt;ij++) {
     double tt = ij*tPD/inputDataPt;
-    double amp = 5.*tt		     // Addition of 1000, 1500, 2000,
-      + sin(2.*TMath::Pi()*1000.*tt) // 3000 and 4000 Hz Sine Wave
-      + sin(2.*TMath::Pi()*1500.*tt)
-      + sin(2.*TMath::Pi()*2000.*tt)
-      + sin(2.*TMath::Pi()*3000.*tt)
-      + sin(2.*TMath::Pi()*4000.*tt);
+    // double amp = 5.*tt		     // Addition of 1000, 1500, 2000,
+    //   + sin(2.*TMath::Pi()*1000.*tt) // 3000 and 4000 Hz Sine Wave
+    //   + sin(2.*TMath::Pi()*1500.*tt)
+    //   + sin(2.*TMath::Pi()*2000.*tt)
+    //   + sin(2.*TMath::Pi()*3000.*tt)
+    //   + sin(2.*TMath::Pi()*4000.*tt);
+    double amp =
+      1.*sin(2.*TMath::Pi()*4.9*tt) +
+      3.*sin(2.*TMath::Pi()*5.0*tt) +
+      2.*sin(2.*TMath::Pi()*5.1*tt) ;
     pos0.push_back(tt);
     amp0.push_back(amp);
   }
@@ -63,6 +67,7 @@ int main() {
   /****** d-FFT *********/
   std::cout << " DFT Starts...." << std::endl;
   fft::dft fft_straight(data_C);
+  fft_straight.doDFT();
   fft::dft::CNArray out_data_C = fft_straight.getDFT();
   std::cout << " DFT Ends...." << std::endl;
   
@@ -70,7 +75,7 @@ int main() {
   cBin.clear(); cBin.reserve(nn/2);
   cAmp.clear(); cAmp.reserve(nn/2);
   for(int ij=0;ij<nn/2;ij++) {
-    cBin.push_back(ij/(2.*tPD));
+    cBin.push_back(ij/tPD);
     cAmp.push_back(abs(out_data_C[ij]));
   }
 
@@ -78,6 +83,7 @@ int main() {
   fft::dft::CNArray data_I = fft_straight.getFullDFT();
   std::cout << " iDFFT Starts...." << std::endl;
   fft::dft fft_inverse(data_I);
+  fft_straight.doiDFT();
   fft::dft::CNArray out_data_I = fft_inverse.getFullDFT();
   std::cout << " iDFFT Ends...." << std::endl;
 
@@ -103,13 +109,14 @@ int main() {
   h0->Draw("AL");
   c1->cd(3);
   h1->Draw("AL*");
-  gPad->SetLogy(1);
-  h1->GetXaxis()->SetRangeUser(500., 5000.);
+  // gPad->SetLogy(1);
+  h1->GetXaxis()->SetRangeUser(4., 6.);
   // h1->GetXaxis()->SetRangeUser(1995., 2005.);
   c1->cd(4);
   h2->Draw("AL");
   
   c1->SaveAs("fft.jpg");
+  c1->SaveAs("fft.C");
   
   return 0;
 }

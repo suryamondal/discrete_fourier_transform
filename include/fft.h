@@ -26,6 +26,9 @@ namespace fft {
     };
     virtual ~dft() {};
 
+    void  doDFT() {DFT(outputArray);};
+    void doiDFT() {iDFT(outputArray);};
+
     CNArray getDFT() {copyHalfArray(); return halfOutputArray;};
     CNArray getFullDFT() {return outputArray;};
     
@@ -37,9 +40,6 @@ namespace fft {
     
     void  DFT(CNArray& x);
     void iDFT(CNArray& x);
-
-    void  doDFT() {DFT(outputArray);};
-    void doiDFT() {iDFT(outputArray);};
     
     void copyHalfArray();
 
