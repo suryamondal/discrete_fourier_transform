@@ -50,23 +50,10 @@ void fft::dft::iDFT(CNArray& x) {
   }
 }
 
-// void fft::dft::doFFT() {
-//   FFT(outputArray);
-// }
-
-// void fft::dft::doiFFT() {
-//   iFFT(outputArray);
-// }
-
 void fft::dft::copyHalfArray() {
   halfOutputArray.reserve(arraySize/2);
   halfOutputArray.assign(outputArray.begin(),
 			 (outputArray.begin() +
 			  arraySize/2 - 1));
 }
-
-// fft::dft::CNArray fft::dft::GetFFT() {
-//   copyHalfArray();
-//   return halfOutputArray;
-// }
 

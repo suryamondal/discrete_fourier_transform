@@ -13,7 +13,7 @@ const double tPD = 20.;		 // Total Path Difference in sec
 const double maxFrequency = 10.; // Maximum Frequency to Calculate
 
 const Long64_t maxGenPt = 1.;	     // If you force
-const Long64_t maxDataPt = pow(2,1); // If you force
+const Long64_t maxDataPt = std::pow(2,1); // If you force
 
 int main() {
 
@@ -49,7 +49,7 @@ int main() {
   const Long64_t maxDesiredPt = std::max(inputDataPt,maxDataPt);
 
   int pFactor = utils::findExponent(maxDesiredPt,2);
-  const Long64_t nn = pow(2,pFactor); // Number for Padding
+  const Long64_t nn = std::pow(2,pFactor); // Number for Padding
   std::cout << " Size of FFT Input " << nn << std::endl;
 
   std::vector<double> outPos,outAmp; // Vector for Padded Data
