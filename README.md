@@ -9,6 +9,7 @@ Fourier transform is performed on the Fourier spectra.
 
 Compile and run with:
 ```
+mkdir -p build
 cd build
 make
 cd ..
