@@ -11,6 +11,8 @@ Compile and run with:
 ```
 mkdir -p build
 cd build
+rm -rf * (caution: make sure that you are really in build directory)
+cmake ..
 make
 cd ..
 ./fft_main
