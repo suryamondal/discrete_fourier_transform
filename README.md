@@ -15,4 +15,4 @@ cd ..
 ./fft_main
 ```
 
-For more info, one might check this [website](https://fakephysicist.com/misc/cooley-turkey-dfft-vectors-cpp/).
+For more info, one might check this [website](https://fakephysicist.com/misc/cooley-turkey-dfft-vectors-cpp/){:target="_blank" rel="noopener"}.
