@@ -19,3 +19,7 @@ cd ..
 ```
 
 For more info, one might check this [website](https://fakephysicist.com/misc/cooley-turkey-dfft-vectors-cpp/).
+
+*Note*: This code uses some libraries of `CERN ROOT`. It is `free` and a
+great tool. I recommend to use it. Otherwise, modify the code if you
+wish not to install it.
