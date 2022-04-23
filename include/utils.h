@@ -18,13 +18,13 @@ namespace utils {
       } else {break;}
     }
     return pFactor;
-  };
-
+  }
+  
   /** interpolate (x,y) array into a new (x1,y1) array
    *
    * use it only for double or float.
    */
-  template<typedef T>
+  template<typename T>
   int padData(const std::vector<T> &x,
 	      const std::vector<T> &y,
 	      std::vector<T> &x1,
@@ -32,7 +32,7 @@ namespace utils {
 	      const int newLength) {
 
     if(x.size()!=y.size()) {return 1;}
-    if(x.size()>=newLength) {return 2;}
+    if(int(x.size())>=newLength) {return 2;}
     
     x1.clear(); x1.reserve(newLength);
     y1.clear(); y1.reserve(newLength);
@@ -61,8 +61,8 @@ namespace utils {
     } // for(int ij=0;ij<newLength;) {
 
     return 0;
-  };
-
+  }
+  
 }
 
 
