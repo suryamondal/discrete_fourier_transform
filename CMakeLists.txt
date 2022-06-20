@@ -1,5 +1,5 @@
 
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.9)
 
 # set the project name
 project(fft_main)
@@ -27,8 +27,9 @@ file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cc)
 file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
 
 separate_arguments(ROOT_EXE_LINKER_FLAGS)
-add_executable(fft_main ${headers} ${sources})
+add_executable(fft_main ${sources})
 
+target_include_directories(fft_main PUBLIC ${PROJECT_SOURCE_DIR}/include)
 target_link_libraries(fft_main PUBLIC ${ROOT_LIBRARIES} ${ROOT_EXE_LINKER_FLAGS})
 
 # # specify the C++ standard
